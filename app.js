@@ -1,14 +1,12 @@
 const inquirer = require("inquirer");
 
 class Questions {
-  constructor(answerArray) {
-      this.answerArray = answerArray;
-
+  constructor() {
   }
 
-  askQuestions() {
+    askQuestions() {
     let answerArray = [];
-    inquirer
+     inquirer
       .prompt([
         {
           type: "number",
@@ -42,20 +40,24 @@ class Questions {
         if (optionArray.includes("numbers")) {
             answerArray.push("numbers");
           }
-        console.log(answerArray)
+        return new Questions(answerArray);
       });
   }
 }
 
 
 class Generator {
-    constructor(answerArray, charArray) {
+    constructor(answerArray) {
       this.answerArray = answerArray;
-      this.charArray = charArray;
-      charArray = [];
+      let charArray = [];
     }
+    test() {
+        console.log(this.answerArray)
+    }
+
+
     getRandomLowerCaseLetter() {
-      return (String.fromCharCode(Math.floor(Math.random() * (123 - 97) + 97)));
+      charArray.push(String.fromCharCode(Math.floor(Math.random() * (123 - 97) + 97)));
     }
     getRandomUpperCaseLetter() {
       return (String.fromCharCode(Math.floor(Math.random() * (123 - 97) + 97))).toUpperCase();
@@ -72,45 +74,13 @@ class Generator {
     getRandomNumber() {
         return (String.fromCharCode(Math.floor(Math.random() * (58 - 48) + 48)))
     }
-
-
 }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 const question = new Questions();
-question.askQuestions();
+const generate = new Generator(question.askQuestions());
+generate.test();
+//question.askQuestions();
 
 module.exports = Questions;
